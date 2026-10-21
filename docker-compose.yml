@@ -1,0 +1,23 @@
+name: child-tracker-android-build
+
+services:
+  android-build:
+    build:
+      context: .
+    container_name: child-tracker-build
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - gradle-home:/root/.gradle
+      - yarn-cache:/usr/local/share/.cache/yarn
+    environment:
+      - ANDROID_HOME=/opt/android-sdk
+      - ANDROID_SDK_ROOT=/opt/android-sdk
+      - GRADLE_OPTS=-Dorg.gradle.daemon=false
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+volumes:
+  gradle-home:
+  yarn-cache:
